@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">TareMakmur</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="login_title">Tare Makmur</string>
+    <string name="masukkan_username">Masukkan Username</string>
+    <string name="password_hint">Masukkan Passworc</string>
+    <string name="text_login">Login</string>
+    <string name="title_barang">Barang</string>
+</resources>
