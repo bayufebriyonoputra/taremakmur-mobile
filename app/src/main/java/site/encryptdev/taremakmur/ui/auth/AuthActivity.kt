@@ -16,6 +16,7 @@ import site.encryptdev.taremakmur.ui.UserPreferences
 class AuthActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAuthBinding
     private var loginResponse: LoginResponse? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAuthBinding.inflate(layoutInflater)
@@ -56,6 +57,8 @@ class AuthActivity : AppCompatActivity() {
                 snackbar.show()
             }
         }
+
+
 
     }
 

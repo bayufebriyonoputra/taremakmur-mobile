@@ -1,5 +1,6 @@
 package site.encryptdev.taremakmur.data.remote.retrofit
 
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -8,6 +9,11 @@ import site.encryptdev.taremakmur.BuildConfig
 
 object ApiConfig {
     fun getService(): ApiService{
+
+        val gson = GsonBuilder()
+            .setLenient()
+            .create()
+
         val loggingInterceptor = HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY)
         val client: OkHttpClient = OkHttpClient.Builder()
