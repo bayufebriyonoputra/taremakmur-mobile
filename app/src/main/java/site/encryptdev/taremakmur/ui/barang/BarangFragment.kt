@@ -1,10 +1,15 @@
 package site.encryptdev.taremakmur.ui.barang
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -51,6 +56,22 @@ class BarangFragment : Fragment() {
 
             setItemsData(it)
         }
+
+        binding.etCari.setOnEditorActionListener{_, actionId, event ->
+            if(actionId == EditorInfo.IME_ACTION_DONE || (event.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_ENTER)){
+                handleTextChanged(binding.etCari.text.toString(), barangViewModel, token)
+                true
+            }else{
+                false
+            }
+
+        }
+
+
+    }
+
+    private fun handleTextChanged(text: String, viewModel: BarangViewModel, token: String) {
+        viewModel.getByKode(token, text)
 
     }
 

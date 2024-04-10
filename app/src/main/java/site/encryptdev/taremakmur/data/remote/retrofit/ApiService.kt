@@ -5,6 +5,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Path
 import site.encryptdev.taremakmur.data.remote.response.BarangResponse
 import site.encryptdev.taremakmur.data.remote.response.BarangResponseItem
 import site.encryptdev.taremakmur.data.remote.response.LoginBody
@@ -17,4 +18,7 @@ interface ApiService {
 
     @GET("barangs")
     fun getAllBarang(@Header("Authorization") token: String): Call<List<BarangResponseItem>>
+
+    @GET("barangs/{kode}")
+    fun getBarangByKode(@Header("Authorization") token: String, @Path("kode") kode: String): Call<List<BarangResponseItem>>
 }

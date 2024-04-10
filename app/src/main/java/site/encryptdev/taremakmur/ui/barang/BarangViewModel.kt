@@ -31,7 +31,6 @@ class BarangViewModel : ViewModel() {
                 _isLoading.value = false
 
                 if(response.isSuccessful){
-                    Log.d("ANJING", response.body().toString())
                     _barang.value = response.body()
                 }
             }
@@ -44,5 +43,29 @@ class BarangViewModel : ViewModel() {
 
         })
 
+    }
+
+    fun getByKode(token: String, kode : String){
+        _isLoading.value = true
+        val client = ApiConfig.getService().getBarangByKode("Bearer $token",kode)
+        client.enqueue(object : Callback<List<BarangResponseItem>>{
+            override fun onResponse(
+                p0: Call<List<BarangResponseItem>>,
+                response: Response<List<BarangResponseItem>>
+            ) {
+               _isLoading.value = false
+//                Log.d("ANJAY", "oke");
+                if(response.isSuccessful){
+                    _barang.value = response.body()
+                }
+            }
+
+            override fun onFailure(p0: Call<List<BarangResponseItem>>, p1: Throwable) {
+                _isLoading.value = false
+                _barang.value = emptyList()
+            }
+
+
+        })
     }
 }
