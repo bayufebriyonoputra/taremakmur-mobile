@@ -7,17 +7,21 @@ import androidx.lifecycle.ViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import site.encryptdev.taremakmur.data.BarangRepository
 import site.encryptdev.taremakmur.data.remote.response.BarangResponse
 import site.encryptdev.taremakmur.data.remote.response.BarangResponseItem
 import site.encryptdev.taremakmur.data.remote.retrofit.ApiConfig
 
-class BarangViewModel : ViewModel() {
+class BarangViewModel(private val barangRepository: BarangRepository) : ViewModel() {
 
     private var _barang = MutableLiveData<List<BarangResponseItem?>>()
     val barang: MutableLiveData<List<BarangResponseItem?>> = _barang
 
     private var _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
+
+    fun getAllBarang(token: String) = barangRepository.getAllBarang("Bearer $token")
+    fun getByKodeOffline(kode: String) = barangRepository.searchByKode(kode)
 
     fun getBarang(token: String) {
 
@@ -54,7 +58,6 @@ class BarangViewModel : ViewModel() {
                 response: Response<List<BarangResponseItem>>
             ) {
                _isLoading.value = false
-//                Log.d("ANJAY", "oke");
                 if(response.isSuccessful){
                     _barang.value = response.body()
                 }

@@ -3,11 +3,12 @@ package site.encryptdev.taremakmur.ui.barang
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import site.encryptdev.taremakmur.data.local.entity.BarangEntity
 import site.encryptdev.taremakmur.data.remote.response.BarangResponseItem
 import site.encryptdev.taremakmur.databinding.ItemBarangBinding
 import kotlin.math.floor
 
-class BarangAdapter(private val listBarang: List<BarangResponseItem?>): RecyclerView.Adapter<BarangAdapter.BarangHolder>() {
+class BarangAdapter(private val listBarang: List<BarangEntity?>): RecyclerView.Adapter<BarangAdapter.BarangHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BarangHolder {

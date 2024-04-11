@@ -20,8 +20,8 @@ data class BarangResponseItem(
     @field:SerializedName("kredit_pack")
     val kreditPack: Int? = null,
 
-    @field:SerializedName("created_at")
-    val createdAt: String? = null,
+//    @field:SerializedName("created_at")
+//    val createdAt: String? = null,
 
 
     @field:SerializedName("stock_bayangan")
