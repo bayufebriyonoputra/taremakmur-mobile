@@ -8,4 +8,7 @@
     <string name="password_hint">Masukkan Passworc</string>
     <string name="text_login">Login</string>
     <string name="title_barang">Barang</string>
+    <string name="title_invoice">Invoice</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

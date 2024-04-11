@@ -63,8 +63,8 @@ class BarangFragment : Fragment() {
 
                     is Result.Error -> {
                         binding.progressBarBarang.visibility = View.GONE
-                        Toast.makeText(requireActivity(), result.error.toString(), Toast.LENGTH_SHORT)
-                            .show()
+//                        Toast.makeText(requireActivity(), result.error.toString(), Toast.LENGTH_SHORT)
+//                            .show()
                     }
 
                     is Result.Sucess -> {

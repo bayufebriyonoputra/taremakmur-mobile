@@ -1,10 +1,10 @@
-package site.encryptdev.taremakmur.ui.home
+package site.encryptdev.taremakmur.ui.invoice
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
+class InvoiceViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"
