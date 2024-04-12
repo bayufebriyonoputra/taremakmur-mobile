@@ -1,8 +1,15 @@
+import org.jetbrains.kotlin.ir.backend.js.compile
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("kotlin-kapt")
+
+
 }
+
+
+
 
 android {
     namespace = "site.encryptdev.taremakmur"
@@ -62,6 +69,7 @@ dependencies {
     //room
     implementation("androidx.room:room-runtime:2.5.0-alpha02")
     kapt("androidx.room:room-compiler:2.5.0-alpha02")
+
 
     //retrofit
 //    implementation("com.squareup.retrofit2:retrofit:2.9.0")
