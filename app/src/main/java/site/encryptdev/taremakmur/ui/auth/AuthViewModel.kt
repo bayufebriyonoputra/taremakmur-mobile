@@ -1,15 +1,12 @@
 package site.encryptdev.taremakmur.ui.auth
 
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import site.encryptdev.taremakmur.data.remote.response.LoginBody
+import site.encryptdev.taremakmur.data.remote.body.LoginBody
 import site.encryptdev.taremakmur.data.remote.response.LoginResponse
 import site.encryptdev.taremakmur.data.remote.retrofit.ApiConfig
 

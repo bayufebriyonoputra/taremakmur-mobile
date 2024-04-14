@@ -37,16 +37,16 @@ class BarangRepository private constructor(
                         barangs?.forEach { barang ->
                             val barang = BarangEntity(
                                 barang.id!!,
-                                barang.cashDus!!,
-                                barang.stockRenteng!!,
-                                barang.kreditPack!!,
-                                barang.stockBayangan!!,
-                                barang.kodeBarang!!,
-                                barang.jenis!!,
-                                barang.cashPack!!,
-                                barang.kreditDus!!,
-                                barang.namaBarang!!,
-                                barang.jumlahRenteng!!
+                                barang.cashDus ?: 0,
+                                barang.stockRenteng ?: 0,
+                                barang.kreditPack ?: 0,
+                                barang.stockBayangan ?: 0,
+                                barang.kodeBarang ?: "",
+                                barang.jenis ?: "",
+                                barang.cashPack ?: 0,
+                                barang.kreditDus ?: 0,
+                                barang.namaBarang ?: "",
+                                barang.jumlahRenteng ?: 0
                             )
                             newList.add(barang)
                         }
@@ -68,6 +68,8 @@ class BarangRepository private constructor(
         }
         return result
     }
+
+    fun getBarangOffline(): LiveData<List<BarangEntity>> = barangsDao.getAllBarangs()
 
     fun searchByKode(kode: String): LiveData<List<BarangEntity>>{
         return barangsDao.getBarangByKode(kode)

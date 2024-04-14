@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 class BarangEntity (
     @field:ColumnInfo(name = "id")
     @field:PrimaryKey
-    val id: String,
+    var id: String,
 
     @field:ColumnInfo(name = "cash_dus")
     val cashDus: Int,

@@ -6,9 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import site.encryptdev.taremakmur.R
 import site.encryptdev.taremakmur.databinding.FragmentInvoiceBinding
+import site.encryptdev.taremakmur.ui.UserPreferences
+import site.encryptdev.taremakmur.ui.barang.BarangViewModel
+import site.encryptdev.taremakmur.ui.barang.BarangViewModelFactory
 import site.encryptdev.taremakmur.ui.invoice.addInvoice.AddInvoiceActivity
 
 
@@ -34,7 +38,13 @@ class InvoiceFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val fragmentManager = parentFragmentManager
+        val factory: BarangViewModelFactory = BarangViewModelFactory.getInstance(requireActivity())
+        val viewModels: BarangViewModel by viewModels {
+            factory
+        }
+        val userPreferences = UserPreferences(requireActivity())
+
+        viewModels.getAllBarang(userPreferences.getToken()?: "")
             binding.fabInvoice.setOnClickListener {
                startActivity(Intent(requireActivity(), AddInvoiceActivity::class.java))
             }

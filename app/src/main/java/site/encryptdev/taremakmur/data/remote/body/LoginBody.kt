@@ -1,4 +1,4 @@
-package site.encryptdev.taremakmur.data.remote.response
+package site.encryptdev.taremakmur.data.remote.body
 
 import com.google.gson.annotations.SerializedName
 

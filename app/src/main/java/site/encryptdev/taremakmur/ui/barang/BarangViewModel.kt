@@ -22,6 +22,7 @@ class BarangViewModel(private val barangRepository: BarangRepository) : ViewMode
 
     fun getAllBarang(token: String) = barangRepository.getAllBarang("Bearer $token")
     fun getByKodeOffline(kode: String) = barangRepository.searchByKode(kode)
+    fun getBarangOffline() = barangRepository.getBarangOffline()
 
     fun getBarang(token: String) {
 
