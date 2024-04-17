@@ -38,6 +38,8 @@ class OrderBarangRepository(
     fun getTotalDiskon(): Int = orderBarangDao.getTotalDiskon()
     fun deleteAll() = orderBarangDao.deleteAll()
 
+    fun deleteById(id: Int) = orderBarangDao.deleteById(id)
+
     fun getBarang(token: String):LiveData<List<BarangResponseItem>>{
 
         var list = MutableLiveData<List<BarangResponseItem>>()

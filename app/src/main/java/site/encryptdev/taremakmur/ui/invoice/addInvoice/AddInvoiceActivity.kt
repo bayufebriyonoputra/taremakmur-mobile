@@ -10,10 +10,16 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import site.encryptdev.taremakmur.R
+import site.encryptdev.taremakmur.data.Result
+import site.encryptdev.taremakmur.data.local.entity.BarangEntity
+import site.encryptdev.taremakmur.data.local.entity.OrderBarangEntity
 import site.encryptdev.taremakmur.data.remote.response.CustomersResponse
 import site.encryptdev.taremakmur.databinding.ActivityAddInvoiceBinding
 import site.encryptdev.taremakmur.ui.UserPreferences
+import site.encryptdev.taremakmur.ui.barang.BarangAdapter
 import site.encryptdev.taremakmur.ui.invoice.addBarang.AddBarangActivity
 import site.encryptdev.taremakmur.ui.invoice.addBarang.OrderBarangViewModel
 import site.encryptdev.taremakmur.ui.invoice.addBarang.OrderBarangViewModelFactory
@@ -53,6 +59,10 @@ class AddInvoiceActivity : AppCompatActivity() {
             customer = it
         }
 
+        val layoutManager = LinearLayoutManager(this)
+        binding.rvOrder.layoutManager = layoutManager
+        val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
+        binding.rvOrder.addItemDecoration(itemDecoration)
 
         binding.actPelanggan.setOnDismissListener {
             val selectedCustomer = binding.actPelanggan.text.toString()
@@ -76,15 +86,7 @@ class AddInvoiceActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val factory: OrderBarangViewModelFactory = OrderBarangViewModelFactory.getInstance(this)
-        val orderViewModel: OrderBarangViewModel by viewModels {
-            factory
-        }
-        val totalHarga = orderViewModel.getTotalHarga()
-        val totalDiskon = orderViewModel.getTotalDiskon()
-
-        binding.tvHarga.text = "Total Harga : ${totalHarga.toString().toCurrencyFormat()}"
-        binding.tvDiskon.text = "Total Diskon : ${totalDiskon.toString().toCurrencyFormat()}"
+       refreshOrderData()
 
     }
 
@@ -105,5 +107,56 @@ class AddInvoiceActivity : AppCompatActivity() {
         val numberFormat = NumberFormat.getCurrencyInstance(localeID)
         numberFormat.minimumFractionDigits = 0
         return numberFormat.format(doubleValue)
+    }
+
+    private fun setItemsData(items: List<OrderBarangEntity>) {
+
+        val adapter = OrderAdapter(items)
+        adapter.setOnItemClickCallback(object : OrderAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: OrderBarangEntity) {
+                val factory: OrderBarangViewModelFactory = OrderBarangViewModelFactory.getInstance(this@AddInvoiceActivity)
+                val orderViewModel: OrderBarangViewModel by viewModels {
+                    factory
+                }
+                orderViewModel.deleteOrderById(data.id!!)
+                refreshOrderData()
+            }
+
+        })
+        binding.rvOrder.adapter = adapter
+
+    }
+
+    private fun refreshOrderData(){
+        val factory: OrderBarangViewModelFactory = OrderBarangViewModelFactory.getInstance(this)
+        val orderViewModel: OrderBarangViewModel by viewModels {
+            factory
+        }
+        val totalHarga = orderViewModel.getTotalHarga()
+        val totalDiskon = orderViewModel.getTotalDiskon()
+
+        orderViewModel.getOrder().observe(this){result ->
+            if (result != null) {
+                when (result) {
+                    is Result.loading -> {
+                        //binding.progressBarBarang.visibility = View.VISIBLE
+                    }
+
+                    is Result.Error -> {
+                        // binding.progressBarBarang.visibility = View.GONE
+
+                    }
+
+                    is Result.Sucess -> {
+                        // binding.progressBarBarang.visibility = View.GONE
+                        val data = result.data
+                        setItemsData(data)
+                    }
+                }
+            }
+        }
+
+        binding.tvHarga.text = "Total Harga : ${totalHarga.toString().toCurrencyFormat()}"
+        binding.tvDiskon.text = "Total Diskon : ${totalDiskon.toString().toCurrencyFormat()}"
     }
 }

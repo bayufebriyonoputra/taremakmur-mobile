@@ -23,6 +23,8 @@ class OrderBarangViewModel(private val orderRepository: OrderBarangRepository): 
     fun getBarang(token: String) = orderRepository.getBarang(token)
     fun deleteAllOrder() = orderRepository.deleteAll()
 
+    fun deleteOrderById(id: Int) = orderRepository.deleteById(id)
+
     fun getTotalHarga(): Int = orderRepository.getTotalHarga()
     fun getTotalDiskon(): Int = orderRepository.getTotalDiskon()
 

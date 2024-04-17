@@ -16,6 +16,9 @@ interface OrderBarangDao {
     @Query("DELETE FROM order_barang")
     fun deleteAll()
 
+    @Query("DELETE FROM order_barang WHERE id = :id")
+    fun deleteById(id: Int)
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertOrder(order: OrderBarangEntity)
 
