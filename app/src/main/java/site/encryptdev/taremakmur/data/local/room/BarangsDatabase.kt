@@ -8,10 +8,12 @@ import site.encryptdev.taremakmur.data.local.entity.BarangEntity
 import site.encryptdev.taremakmur.data.local.entity.CustomerEntity
 import site.encryptdev.taremakmur.data.local.entity.OrderBarangEntity
 
-@Database(entities = [BarangEntity::class, OrderBarangEntity::class, CustomerEntity::class], version = 5, exportSchema = false)
+@Database(entities = [BarangEntity::class, OrderBarangEntity::class, CustomerEntity::class], version = 6, exportSchema = false)
 abstract class BarangsDatabase: RoomDatabase() {
     abstract fun barangsDao(): BarangsDao
     abstract fun orderBarangDao() : OrderBarangDao
+
+    abstract fun customerDao(): CustomerDao
 
 
     companion object {

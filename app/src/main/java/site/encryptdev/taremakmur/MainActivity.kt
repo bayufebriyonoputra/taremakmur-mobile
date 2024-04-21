@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import site.encryptdev.taremakmur.databinding.ActivityMainBinding
 import site.encryptdev.taremakmur.ui.barang.BarangFragment
 import site.encryptdev.taremakmur.ui.invoice.InvoiceFragment
-import site.encryptdev.taremakmur.ui.notifications.NotificationsFragment
+import site.encryptdev.taremakmur.ui.customer.CustomerFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.customer->{
-                    loadFragment(NotificationsFragment())
+                    loadFragment(CustomerFragment())
                     true
                 }
 

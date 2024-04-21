@@ -9,12 +9,17 @@ import retrofit2.http.Path
 import site.encryptdev.taremakmur.data.remote.response.BarangResponseItem
 import site.encryptdev.taremakmur.data.remote.response.CustomersResponse
 import site.encryptdev.taremakmur.data.remote.body.LoginBody
+import site.encryptdev.taremakmur.data.remote.body.MakeInvoiceBody
 import site.encryptdev.taremakmur.data.remote.response.LoginResponse
+import site.encryptdev.taremakmur.data.remote.response.MessageResponse
 
 interface ApiService {
 
     @POST("login")
     fun login(@Body body: LoginBody): Call<LoginResponse>
+
+    @POST("order")
+    fun createInvoice(@Body body: MakeInvoiceBody, @Header("Authorization") token: String): Call<MessageResponse>
 
     @GET("barangs")
     fun getAllBarang(@Header("Authorization") token: String): Call<List<BarangResponseItem>>
