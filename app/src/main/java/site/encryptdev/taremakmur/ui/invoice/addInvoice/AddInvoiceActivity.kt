@@ -2,7 +2,6 @@ package site.encryptdev.taremakmur.ui.invoice.addInvoice
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -17,10 +16,8 @@ import site.encryptdev.taremakmur.data.local.entity.CustomerEntity
 import site.encryptdev.taremakmur.data.local.entity.OrderBarangEntity
 import site.encryptdev.taremakmur.data.remote.body.DataOrderBarang
 import site.encryptdev.taremakmur.data.remote.body.MakeInvoiceBody
-import site.encryptdev.taremakmur.data.remote.response.CustomersResponse
 import site.encryptdev.taremakmur.databinding.ActivityAddInvoiceBinding
 import site.encryptdev.taremakmur.ui.UserPreferences
-import site.encryptdev.taremakmur.ui.barang.BarangAdapter
 import site.encryptdev.taremakmur.ui.customer.CustomerViewModel
 import site.encryptdev.taremakmur.ui.customer.CustomerViewModelFactory
 import site.encryptdev.taremakmur.ui.invoice.addBarang.AddBarangActivity

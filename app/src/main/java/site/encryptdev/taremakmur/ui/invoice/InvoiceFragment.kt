@@ -2,13 +2,16 @@ package site.encryptdev.taremakmur.ui.invoice
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import site.encryptdev.taremakmur.R
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import site.encryptdev.taremakmur.data.remote.response.ListOrderResponseItem
 import site.encryptdev.taremakmur.databinding.FragmentInvoiceBinding
 import site.encryptdev.taremakmur.ui.UserPreferences
 import site.encryptdev.taremakmur.ui.barang.BarangViewModel
@@ -18,9 +21,11 @@ import site.encryptdev.taremakmur.ui.customer.CustomerViewModelFactory
 import site.encryptdev.taremakmur.ui.invoice.addInvoice.AddInvoiceActivity
 
 
+
 class InvoiceFragment : Fragment() {
 
     private var _binding: FragmentInvoiceBinding? = null
+    private lateinit var invoiceViewModel: InvoiceViewModel
 
 
     private val binding get() = _binding!!
@@ -30,8 +35,6 @@ class InvoiceFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(InvoiceViewModel::class.java)
 
         _binding = FragmentInvoiceBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -40,11 +43,28 @@ class InvoiceFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val layoutManager = LinearLayoutManager(requireActivity())
+        binding.rvOrder.layoutManager = layoutManager
+        val itemDecoration = DividerItemDecoration(requireActivity(), layoutManager.orientation)
+        binding.rvOrder.addItemDecoration(itemDecoration)
+
+        invoiceViewModel = ViewModelProvider(requireActivity()).get(InvoiceViewModel::class.java)
         val factory: BarangViewModelFactory = BarangViewModelFactory.getInstance(requireActivity())
         val viewModels: BarangViewModel by viewModels {
             factory
         }
         val userPreferences = UserPreferences(requireActivity())
+
+        //get list order
+        invoiceViewModel.getListOrder(userPreferences.getToken()?: "")
+        invoiceViewModel.listOrder.observe(viewLifecycleOwner){
+            setItemsData(it)
+            Log.d("Anjing", "ok")
+        }
+        invoiceViewModel.isLoading.observe(viewLifecycleOwner){
+            setLoading(it)
+        }
 
         viewModels.getAllBarang(userPreferences.getToken() ?: "")
         binding.fabInvoice.setOnClickListener {
@@ -63,5 +83,17 @@ class InvoiceFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun setLoading(isLoading: Boolean) {
+        binding.progressBar3.visibility = if (isLoading) View.VISIBLE else View.INVISIBLE
+    }
+
+    private fun setItemsData(items: List<ListOrderResponseItem?>?) {
+
+        Log.d("Anjing", items.toString())
+        val adapter = OrderAdapter(items)
+        binding.rvOrder.adapter = adapter
+
     }
 }

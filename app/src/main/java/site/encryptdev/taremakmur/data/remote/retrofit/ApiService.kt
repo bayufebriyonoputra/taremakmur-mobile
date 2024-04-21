@@ -10,6 +10,8 @@ import site.encryptdev.taremakmur.data.remote.response.BarangResponseItem
 import site.encryptdev.taremakmur.data.remote.response.CustomersResponse
 import site.encryptdev.taremakmur.data.remote.body.LoginBody
 import site.encryptdev.taremakmur.data.remote.body.MakeInvoiceBody
+import site.encryptdev.taremakmur.data.remote.response.ListOrderResponse
+import site.encryptdev.taremakmur.data.remote.response.ListOrderResponseItem
 import site.encryptdev.taremakmur.data.remote.response.LoginResponse
 import site.encryptdev.taremakmur.data.remote.response.MessageResponse
 
@@ -32,5 +34,9 @@ interface ApiService {
 
     @GET("customers")
     fun getAllCustomers(@Header("Authorization") token: String): Call<List<CustomersResponse>>
+
+    @GET("list-order")
+    fun getListOrder(@Header("Authorization") token: String): Call<List<ListOrderResponseItem>>
+
 
 }
