@@ -31,7 +31,7 @@ class BarangAdapter(private val listBarang: List<BarangEntity?>): RecyclerView.A
         holder.binding.tvKodebarang.text =listBarang[position]?.kodeBarang.toString()
         holder.binding.tvHargaDus.text = listBarang[position]?.cashDus.toString()
         holder.binding.tvHargaPack.text = listBarang[position]?.cashPack.toString()
-        holder.binding.tvStockPack.text = listBarang[position]?.stockBayangan.toString()
+        "${listBarang[position]?.stockBayangan.toString()} Pack".also { holder.binding.tvStockPack.text = it }
 
     }
 

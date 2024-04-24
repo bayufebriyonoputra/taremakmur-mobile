@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -25,7 +26,7 @@ class CustomerFragment : Fragment() {
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
+    private val binding get() = _binding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,15 +34,15 @@ class CustomerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCustomerBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root!!
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val layoutManager = LinearLayoutManager(requireActivity())
-        binding.rvCustomer.layoutManager = layoutManager
+        binding?.rvCustomer?.layoutManager = layoutManager
         val itemDecoration = DividerItemDecoration(requireActivity(), layoutManager.orientation)
-        binding.rvCustomer.addItemDecoration(itemDecoration)
+        binding?.rvCustomer?.addItemDecoration(itemDecoration)
 
         val userPreferences = UserPreferences(requireActivity())
         val token = userPreferences.getToken()
@@ -50,30 +51,26 @@ class CustomerFragment : Fragment() {
             customerFactory
         }
 
-        binding.tvCariCustomer.setOnEditorActionListener { _, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_DONE || (event.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_ENTER)) {
-                handleTextChanged(binding.tvCariCustomer.text.toString(), customerViewModel)
-                true
-            } else {
-                false
-            }
+
+        binding?.tvCariCustomer?.doAfterTextChanged {
+            handleTextChanged(it.toString(),customerViewModel )
         }
 
             customerViewModel.getAllCustomer(token!!).observe(viewLifecycleOwner){result ->
             if (result != null) {
                 when (result) {
                     is Result.loading -> {
-                        binding.progressBarCustomer.visibility = View.VISIBLE
+                        binding?.progressBarCustomer?.visibility = View.VISIBLE
                     }
 
                     is Result.Error -> {
-                        binding.progressBarCustomer.visibility = View.GONE
+                        binding?.progressBarCustomer?.visibility = View.GONE
 //                        Toast.makeText(requireActivity(), result.error.toString(), Toast.LENGTH_SHORT)
 //                            .show()
                     }
 
                     is Result.Sucess -> {
-                        binding.progressBarCustomer.visibility = View.GONE
+                        binding?.progressBarCustomer?.visibility = View.GONE
                         val data = result.data
                         setItemsData(data)
                     }
@@ -90,7 +87,7 @@ class CustomerFragment : Fragment() {
 
     private fun setItemsData(items: List<CustomerEntity>) {
         val adapter = CustomerAdapter(items)
-        binding.rvCustomer.adapter = adapter
+        binding?.rvCustomer?.adapter = adapter
 
     }
 

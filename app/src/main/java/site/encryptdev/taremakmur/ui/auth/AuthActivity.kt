@@ -51,7 +51,9 @@ class AuthActivity : AppCompatActivity() {
                 userPreferences.saveCredentials(binding.etUsername.text.toString(), binding.etPassword.text.toString(),
                     loginResponse?.accessToken ?: ""
                 )
-                startActivity(Intent(this, MainActivity::class.java))
+                val intent = Intent(this, MainActivity::class.java)
+                finish()
+                startActivity(intent)
             }else{
                 val snackbar = Snackbar.make(binding.main, "Username atau password salah", Snackbar.LENGTH_LONG)
                 snackbar.show()

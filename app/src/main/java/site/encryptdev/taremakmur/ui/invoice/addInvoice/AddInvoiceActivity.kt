@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -97,13 +99,21 @@ class AddInvoiceActivity : AppCompatActivity() {
             }
         }
 
-        binding.fabAddProduct.setOnClickListener {
+        binding.btnTambahBarang.setOnClickListener {
             startActivity(Intent(this, AddBarangActivity::class.java))
         }
 
         binding.btnSubmitInvoice.setOnClickListener {
             submitInvoice(viewModel, token!!)
         }
+
+        // Menangani penekanan tombol kembali
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                showExitConfirmationDialog()
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, callback)
 
     }
 
@@ -112,6 +122,8 @@ class AddInvoiceActivity : AppCompatActivity() {
         refreshOrderData()
 
     }
+
+
 
     private fun setAdapter(list: List<CustomerEntity>) {
         arrayList = ArrayList()
@@ -137,18 +149,46 @@ class AddInvoiceActivity : AppCompatActivity() {
         val adapter = OrderAdapter(items)
         adapter.setOnItemClickCallback(object : OrderAdapter.OnItemClickCallback {
             override fun onItemClicked(data: OrderBarangEntity) {
-                val factory: OrderBarangViewModelFactory =
-                    OrderBarangViewModelFactory.getInstance(this@AddInvoiceActivity)
-                val orderViewModel: OrderBarangViewModel by viewModels {
-                    factory
-                }
-                orderViewModel.deleteOrderById(data.id!!)
-                refreshOrderData()
+              showDelteConfirmation(data.id!!)
             }
 
         })
         binding.rvOrder.adapter = adapter
 
+    }
+
+    private fun showDelteConfirmation(id: Int){
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Konfirmasi")
+        builder.setMessage("Apakah anda ingin menghapus?")
+        builder.setPositiveButton("Ya"){dialog, wich ->
+            val factory: OrderBarangViewModelFactory =
+                OrderBarangViewModelFactory.getInstance(this@AddInvoiceActivity)
+            val orderViewModel: OrderBarangViewModel by viewModels {
+                factory
+            }
+            orderViewModel.deleteOrderById(id)
+            refreshOrderData()
+        }
+        builder.setNegativeButton("Tidak"){dialog, wich ->
+
+        }
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    private fun showExitConfirmationDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Konfirmasi")
+        builder.setMessage("Apakah Anda yakin ingin kembali data akan terhapus?")
+        builder.setPositiveButton("Ya") { dialog, which ->
+            finish() // Keluar dari aktivitas jika pengguna memilih "Ya"
+        }
+        builder.setNegativeButton("Tidak") { dialog, which ->
+            // Tidak melakukan apa-apa jika pengguna membatalkan keluar
+        }
+        val dialog = builder.create()
+        dialog.show()
     }
 
     private fun refreshOrderData() {

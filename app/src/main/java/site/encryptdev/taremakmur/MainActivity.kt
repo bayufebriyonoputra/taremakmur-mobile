@@ -1,5 +1,6 @@
 package site.encryptdev.taremakmur
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -7,7 +8,14 @@ import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import site.encryptdev.taremakmur.data.remote.response.MessageResponse
+import site.encryptdev.taremakmur.data.remote.retrofit.ApiConfig
 import site.encryptdev.taremakmur.databinding.ActivityMainBinding
+import site.encryptdev.taremakmur.ui.UserPreferences
+import site.encryptdev.taremakmur.ui.auth.AuthActivity
 import site.encryptdev.taremakmur.ui.barang.BarangFragment
 import site.encryptdev.taremakmur.ui.invoice.InvoiceFragment
 import site.encryptdev.taremakmur.ui.customer.CustomerFragment
@@ -21,6 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         val navView: BottomNavigationView = binding.navView
 
@@ -69,7 +78,28 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.signout->{
-                Toast.makeText(this,"tes", Toast.LENGTH_SHORT).show()
+                val userPreferences = UserPreferences(this)
+                val client = ApiConfig.getService().logout("Bearer ${userPreferences.getToken()}")
+                client.enqueue(object :Callback<MessageResponse>{
+                    override fun onResponse(
+                        p0: Call<MessageResponse>,
+                        response: Response<MessageResponse>
+                    ) {
+                      if (response.isSuccessful){
+                          userPreferences.clearCredentials()
+                          val intent = Intent(this@MainActivity, AuthActivity::class.java)
+                          finish()
+                          startActivity(intent)
+                      }else{
+                          Toast.makeText(this@MainActivity,"Gagal Logout Silahkan Coba Lagi", Toast.LENGTH_SHORT).show()
+                      }
+                    }
+
+                    override fun onFailure(p0: Call<MessageResponse>, p1: Throwable) {
+                        Toast.makeText(this@MainActivity,"Gagal Logout Silahkan Coba Lagi", Toast.LENGTH_SHORT).show()
+                    }
+
+                })
             }
         }
         return super.onOptionsItemSelected(item)

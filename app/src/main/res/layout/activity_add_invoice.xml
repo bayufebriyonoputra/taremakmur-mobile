@@ -1,181 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_add_barang"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".ui.invoice.addInvoice.AddInvoiceActivity">
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/tvmetode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Pilih Pelanggan"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/et_pelanggan"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_add_barang"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvmetode"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        tools:context=".ui.invoice.addInvoice.AddInvoiceActivity">
 
-        <AutoCompleteTextView
-            android:id="@+id/actPelanggan"
+        <TextView
+            android:id="@+id/tvmetode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Pilih Pelanggan"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/et_pelanggan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="Pilih Pelanggan" />
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvmetode"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <AutoCompleteTextView
+                android:id="@+id/actPelanggan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Pilih Pelanggan" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Metode Pembayaran"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_pelanggan" />
-
-    <RadioGroup
-        android:id="@+id/rgJenisPembayaran"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="start"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4">
-
-        <RadioButton
-            android:id="@+id/rbTunai"
+        <TextView
+            android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginRight="36dp"
-            android:buttonTint="@color/black"
-            android:checked="true"
-            android:text="Tunai" />
+            android:layout_marginTop="16dp"
+            android:text="Metode Pembayaran"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_pelanggan" />
 
-        <RadioButton
-            android:id="@+id/rbKredit"
+        <RadioGroup
+            android:id="@+id/rgJenisPembayaran"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="start"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+            <RadioButton
+                android:id="@+id/rbTunai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginRight="36dp"
+                android:buttonTint="@color/black"
+                android:checked="true"
+                android:text="Tunai" />
+
+            <RadioButton
+                android:id="@+id/rbKredit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
+                android:text="Kredit" />
+
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/etKeterangan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Keterangan"
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rgJenisPembayaran" />
+
+        <EditText
+            android:id="@+id/etUangMuka"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:hint="Uang Muka"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etKeterangan" />
+
+        <Button
+            android:id="@+id/btnSubmitInvoice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Simpan Invoice"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etUangMuka" />
+
+        <TextView
+            android:id="@+id/tvHarga"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="@color/black"
-            android:text="Kredit" />
+            android:layout_marginTop="12dp"
+            android:text="Total Harga : "
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnSubmitInvoice" />
 
-    </RadioGroup>
+        <TextView
+            android:id="@+id/tvDiskon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Total Diskon : "
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvHarga" />
 
-    <EditText
-        android:id="@+id/etKeterangan"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="Keterangan"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rgJenisPembayaran" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvOrder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDiskon" />
 
-    <EditText
-        android:id="@+id/etUangMuka"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="Uang Muka"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etKeterangan" />
+        <Button
+            android:id="@+id/btnTambahBarang"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:text="Tambah Barang"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvOrder" />
 
-    <Button
-        android:id="@+id/btnSubmitInvoice"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Simpan Invoice"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etUangMuka" />
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/tvHarga"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Total Harga : "
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.043"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSubmitInvoice" />
+</ScrollView>
 
-    <TextView
-        android:id="@+id/tvDiskon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Total Diskon : "
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSubmitInvoice" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvOrder"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSubmitInvoice" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add_product"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.04"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/ic_add"
-        app:tint="@color/white" />
-
-    <ProgressBar
-        android:id="@+id/progressBar2"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-    android:background="@color/white"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>

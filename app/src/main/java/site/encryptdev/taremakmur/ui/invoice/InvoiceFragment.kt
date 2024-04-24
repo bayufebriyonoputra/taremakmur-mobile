@@ -60,7 +60,10 @@ class InvoiceFragment : Fragment() {
         invoiceViewModel.getListOrder(userPreferences.getToken()?: "")
         invoiceViewModel.listOrder.observe(viewLifecycleOwner){
             setItemsData(it)
-            Log.d("Anjing", "ok")
+
+        }
+        binding.tvRefersh.setOnClickListener {
+            invoiceViewModel.getListOrder(userPreferences.getToken()?: "")
         }
         invoiceViewModel.isLoading.observe(viewLifecycleOwner){
             setLoading(it)

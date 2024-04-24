@@ -38,5 +38,7 @@ interface ApiService {
     @GET("list-order")
     fun getListOrder(@Header("Authorization") token: String): Call<List<ListOrderResponseItem>>
 
+    @POST("logout")
+    fun logout(@Header("Authorization") token : String): Call<MessageResponse>
 
 }
