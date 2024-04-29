@@ -62,7 +62,7 @@ class InvoiceFragment : Fragment() {
             setItemsData(it)
 
         }
-        binding.tvRefersh.setOnClickListener {
+        binding.textView3.setOnClickListener {
             invoiceViewModel.getListOrder(userPreferences.getToken()?: "")
         }
         invoiceViewModel.isLoading.observe(viewLifecycleOwner){
@@ -83,6 +83,12 @@ class InvoiceFragment : Fragment() {
         customerViewModels.getAllCustomer(userPreferences.getToken() ?: "")
     }
 
+    override fun onResume() {
+        super.onResume()
+        val userPreferences = UserPreferences(requireActivity())
+        invoiceViewModel.getListOrder(userPreferences.getToken()?: "")
+
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

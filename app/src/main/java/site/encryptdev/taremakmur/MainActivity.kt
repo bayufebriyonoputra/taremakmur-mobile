@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val navView: BottomNavigationView = binding.navView
+        loadFragment(InvoiceFragment())
 
 //        val navController = findNavController(R.id.nav_host_fragment_activity_main)
 //        // Passing each menu ID as a set of Ids because each
@@ -66,7 +67,7 @@ class MainActivity : AppCompatActivity() {
 
     private  fun loadFragment(fragment: Fragment){
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.main_container,fragment)
+        transaction.replace(R.id.nav_host_fragment_activity_main,fragment)
         transaction.commit()
     }
 
