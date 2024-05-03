@@ -50,7 +50,7 @@ class AddInvoiceActivity : AppCompatActivity() {
         val orderViewModel: OrderBarangViewModel by viewModels {
             factory
         }
-        orderViewModel.deleteAllOrder()
+       // orderViewModel.deleteAllOrder()
 
         viewModel = ViewModelProvider(this@AddInvoiceActivity).get(AddInvoiceViewModel::class.java)
 //        viewModel.getCustomer(token!!)
@@ -105,6 +105,7 @@ class AddInvoiceActivity : AppCompatActivity() {
 
         binding.btnSubmitInvoice.setOnClickListener {
             submitInvoice(viewModel, token!!)
+            orderViewModel.deleteAllOrder()
         }
 
         // Menangani penekanan tombol kembali
@@ -265,6 +266,7 @@ class AddInvoiceActivity : AppCompatActivity() {
 
         binding.btnSubmitInvoice.isEnabled = false
         viewModel.makeNewInvoice(body, token)
+
 
     }
 

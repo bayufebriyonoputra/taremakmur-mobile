@@ -69,7 +69,7 @@ dependencies {
     //room
     implementation("androidx.room:room-runtime:2.5.0-alpha02")
     kapt("androidx.room:room-compiler:2.5.0-alpha02")
-
+    implementation( "com.github.barteksc:android-pdf-viewer:3.2.0-beta.1")
 
     //retrofit
 //    implementation("com.squareup.retrofit2:retrofit:2.9.0")

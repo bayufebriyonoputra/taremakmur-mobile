@@ -14,6 +14,7 @@ import site.encryptdev.taremakmur.data.remote.response.ListOrderResponse
 import site.encryptdev.taremakmur.data.remote.response.ListOrderResponseItem
 import site.encryptdev.taremakmur.data.remote.response.LoginResponse
 import site.encryptdev.taremakmur.data.remote.response.MessageResponse
+import site.encryptdev.taremakmur.data.remote.response.PdfResponse
 
 interface ApiService {
 
@@ -41,4 +42,6 @@ interface ApiService {
     @POST("logout")
     fun logout(@Header("Authorization") token : String): Call<MessageResponse>
 
+    @GET("generate-pdf/{no_invoice}")
+    fun generateNota(@Header("Authorization") token: String, @Path("no_invoice") no: String): Call<PdfResponse>
 }

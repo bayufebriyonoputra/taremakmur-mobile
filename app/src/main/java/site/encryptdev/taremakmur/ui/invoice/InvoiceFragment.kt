@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import site.encryptdev.taremakmur.data.remote.response.ListOrderResponseItem
 import site.encryptdev.taremakmur.databinding.FragmentInvoiceBinding
+import site.encryptdev.taremakmur.ui.PdfActivity
 import site.encryptdev.taremakmur.ui.UserPreferences
 import site.encryptdev.taremakmur.ui.barang.BarangViewModel
 import site.encryptdev.taremakmur.ui.barang.BarangViewModelFactory
@@ -102,7 +104,17 @@ class InvoiceFragment : Fragment() {
 
         Log.d("Anjing", items.toString())
         val adapter = OrderAdapter(items)
+        adapter.setOnItemClickCallback(object : OrderAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: ListOrderResponseItem) {
+
+                val intent = Intent(requireActivity(),PdfActivity::class.java)
+                intent.putExtra(PdfActivity.EXTRA_PDF, data.noInvoice)
+                startActivity(intent)
+            }
+
+        })
         binding.rvOrder.adapter = adapter
+
 
     }
 }
