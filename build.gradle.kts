@@ -3,4 +3,5 @@ plugins {
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.jetbrainsKotlinAndroid) apply false
     id("com.android.library") version "8.1.2" apply false
+    id("com.github.ben-manes.versions") version "0.47.0"
 }

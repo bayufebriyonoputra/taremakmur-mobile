@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import site.encryptdev.taremakmur.data.remote.response.ListOrderResponseItem
 import site.encryptdev.taremakmur.databinding.FragmentInvoiceBinding
-import site.encryptdev.taremakmur.ui.PdfActivity
 import site.encryptdev.taremakmur.ui.UserPreferences
 import site.encryptdev.taremakmur.ui.barang.BarangViewModel
 import site.encryptdev.taremakmur.ui.barang.BarangViewModelFactory
@@ -107,8 +106,8 @@ class InvoiceFragment : Fragment() {
         adapter.setOnItemClickCallback(object : OrderAdapter.OnItemClickCallback{
             override fun onItemClicked(data: ListOrderResponseItem) {
 
-                val intent = Intent(requireActivity(),PdfActivity::class.java)
-                intent.putExtra(PdfActivity.EXTRA_PDF, data.noInvoice)
+                val intent = Intent(requireContext(), PdfActivity::class.java)
+                intent.putExtra(PdfActivity.EXTRA_INVOICE, data.noInvoice)
                 startActivity(intent)
             }
 

@@ -23,7 +23,7 @@ android {
         versionName = "1.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "BASE_URL", "\"https://api.taremakmur.online/api/\"")
+        buildConfigField("String", "BASE_URL", "\"https://api.taremakmur.net/api/\"")
     }
 
     buildTypes {
@@ -69,7 +69,6 @@ dependencies {
     //room
     implementation("androidx.room:room-runtime:2.5.0-alpha02")
     kapt("androidx.room:room-compiler:2.5.0-alpha02")
-    implementation( "com.github.barteksc:android-pdf-viewer:3.2.0-beta.1")
 
     //retrofit
 //    implementation("com.squareup.retrofit2:retrofit:2.9.0")
